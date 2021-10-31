@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="info">
+        <h2 class="clock">00:00:00</h2>
+        <form id="login-form" class="">
+            <input required maxlength="15" type="text" placeholder="What is your name?"/>
+            <button><i class="fas fa-sign-in-alt"></i></button>
+        </form>
+        <h1 class="hidden"></h1>
+        <div id="todo">
+            <form id="todo-form">
+                <input type="text" required placeholder="Write a Todo and Press Enter"/>
+            </form>
+            <ul id="todo-list">
+                <span class="todo-list__title">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>To Do List</span>
+                </span>
+            </ul>
+        </div>
+        <div id="quote">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div id="news">
+        <span>Latest Animal Forest News!</span>
+        <div id="player"></div>
+        <div id="weather" class="hidden">
+            <div class="weather-title">Current Location info</div>
+            <div class="weather-info">
+                <span>
+                    <i id="weather-icon" class=""></i>
+                    <span class="weather-text"></span>
+                </span>
+                <span>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="weather-text"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a3120b0f74.js" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/weather.js"></script>
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+  
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('player', {
+            height: '300',
+            width: '520',
+            videoId: 'iIWAdZVJcjc',
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+  
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+          event.target.playVideo();
+        }
+  
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+        function onPlayerStateChange(event) {
+          if (event.data == YT.PlayerState.PLAYING && !done) {
+            done = true;
+          }
+        }
+        function stopVideo() {
+          player.stopVideo();
+        }
+      </script>
+</body>
+</html>
